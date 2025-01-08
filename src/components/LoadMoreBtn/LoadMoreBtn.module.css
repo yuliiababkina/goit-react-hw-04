@@ -1,0 +1,14 @@
+.loadMoreBtn {
+    background-color: #3f50b5;
+    border-radius: 4px;
+    border: none;
+    font-family: inherit;
+    font-size: 18px;
+    padding: 0.6em 1.8em;
+    margin-left: calc(50% - 20px);
+    transition: backgroung-color 0.3s linear;
+}
+
+.loadMoreBtn:hover {
+    background-color: #535bf2;
+}

@@ -1,0 +1,19 @@
+.imagesList {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+    padding-bottom: 12px;
+}
+
+.imagesItem {
+    overflow: hidden;
+    cursor: pointer;
+    box-shadow: 2px 2px 3px 0 rgba(0, 0, 0, 0.4);
+    transition: all 0.3s linear;
+}
+
+.imagesItem:hover {
+    transform: scale(1.02, 1.02);
+}
