@@ -1,11 +1,22 @@
 import Modal from "react-modal";
+import s from "./ImageModal.module.css";
 
 function ImageModal({ image, isOpen, onClose, styles }) {
     return (
-        <Modal isOpen={isOpen} onRequestClose={onClose} styles={styles}>
-            <div>
-                <img src={image?.urls?.regular} alt={image?.alt_description} />
-                <p>Author: {image?.users?.instagram_username}</p>
+        <Modal
+            isOpen={isOpen}
+            onRequestClose={onClose}
+            styles={styles}
+            overlayClassName={s.overlay}
+            className={s.modal}
+            shouldCloseOnOverlayClick={true}
+        >
+            <div className={s.container}>
+                <img
+                    src={image?.urls?.regular}
+                    alt={image?.alt_description}
+                    className={s.image}
+                />
             </div>
         </Modal>
     );

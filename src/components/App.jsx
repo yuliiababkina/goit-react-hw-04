@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import Modal from "react-modal";
 import s from "./App.module.css";
 
@@ -18,9 +18,19 @@ const customStyles = {
         bottom: "auto",
         marginRight: "-50%",
         transform: "translate(-50%, -50%)",
+        overflow: "hidden",
+        height: "80%",
     },
     overlay: {
-        backgroundColor: "rgb(66, 52, 52)",
+        position: "fixed",
+        top: "95px",
+        bottom: "70px",
+        left: "50%",
+        marginLeft: "35px",
+        marginRight: "auto",
+        transform: "translate(-50%, -0%)",
+        backgroundColor: "rgba(255, 255, 255, 0.75)",
+        border: "none",
     },
 };
 
@@ -36,15 +46,16 @@ function App() {
     const [modalIsOpen, setModalIsOpen] = useState(false);
     const [modalImage, setModalImage] = useState(null);
 
-    const openModal = (image) => {
+    const openModal = (imageId) => {
         setModalIsOpen(true);
-        setModalImage(image);
-        console.log(image);
+        setModalImage(imageId);
+        document.body.style.overflow = "hidden";
     };
 
     const closeModal = () => {
         setModalIsOpen(false);
         setModalImage(null);
+        document.body.style.overflow = "";
     };
 
     const handleChangePage = () => {
@@ -86,7 +97,7 @@ function App() {
             <div className={s.dvh}>
                 {isError && <ErrorMessage />}
                 {images && (
-                    <ImageGallery images={images} openModal={openModal} />
+                    <ImageGallery images={images} onOpenModal={openModal} />
                 )}
                 {isLoading && <Loader />}
                 {page < totalPages && (
