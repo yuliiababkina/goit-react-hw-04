@@ -1,12 +1,11 @@
 import Modal from "react-modal";
 import s from "./ImageModal.module.css";
 
-function ImageModal({ image, isOpen, onClose, styles }) {
+function ImageModal({ image, isOpen, onClose }) {
     return (
         <Modal
             isOpen={isOpen}
             onRequestClose={onClose}
-            styles={styles}
             overlayClassName={s.overlay}
             className={s.modal}
             shouldCloseOnOverlayClick={true}

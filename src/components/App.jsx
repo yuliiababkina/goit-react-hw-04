@@ -10,30 +10,6 @@ import ErrorMessage from "./ErrorMessage/ErrorMessage";
 import { fetchImages } from "../services/api";
 import ImageModal from "./ImageModal/ImageModal";
 
-const customStyles = {
-    content: {
-        top: "50%",
-        left: "50%",
-        right: "auto",
-        bottom: "auto",
-        marginRight: "-50%",
-        transform: "translate(-50%, -50%)",
-        overflow: "hidden",
-        height: "80%",
-    },
-    overlay: {
-        position: "fixed",
-        top: "95px",
-        bottom: "70px",
-        left: "50%",
-        marginLeft: "35px",
-        marginRight: "auto",
-        transform: "translate(-50%, -0%)",
-        backgroundColor: "rgba(255, 255, 255, 0.75)",
-        border: "none",
-    },
-};
-
 Modal.setAppElement("#root");
 
 function App() {
@@ -66,6 +42,7 @@ function App() {
         setQuery(newQuery);
         setImages([]);
         setPage(1);
+        setTotalPages(0);
     };
 
     useEffect(() => {
@@ -79,7 +56,10 @@ function App() {
                 setIsError(false);
 
                 const data = await fetchImages(query, page);
-                setTotalPages(data.total_pages);
+                if (page === 1) {
+                    setTotalPages(data.total_pages);
+                }
+
                 setImages((prev) => [...prev, ...data.results]);
             } catch (error) {
                 setIsError(true);
@@ -100,15 +80,15 @@ function App() {
                     <ImageGallery images={images} onOpenModal={openModal} />
                 )}
                 {isLoading && <Loader />}
-                {page < totalPages && (
+                {images && page < totalPages && (
                     <LoadMoreBtn onChangePage={handleChangePage} />
                 )}
+
                 {modalIsOpen && (
                     <ImageModal
                         image={modalImage}
                         isOpen={modalIsOpen}
                         onClose={closeModal}
-                        styles={customStyles}
                     />
                 )}
             </div>
