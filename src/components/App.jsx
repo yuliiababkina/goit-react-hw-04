@@ -51,8 +51,8 @@ function App() {
         }
 
         const getImagesData = async () => {
+            setIsLoading(true);
             try {
-                setIsLoading(true);
                 setIsError(false);
 
                 const data = await fetchImages(query, page);
@@ -80,7 +80,7 @@ function App() {
                     <ImageGallery images={images} onOpenModal={openModal} />
                 )}
                 {isLoading && <Loader />}
-                {images && page < totalPages && (
+                {images.length > 0 && page < totalPages && (
                     <LoadMoreBtn onChangePage={handleChangePage} />
                 )}
 
